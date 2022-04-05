@@ -1,15 +1,24 @@
-{% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ZING</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
-  </head>
-  <body>
-    <img src="{% static 'images/cart1.png' %}" alt="" />
-  </body>
-</html>
+{% extends 'ecommerce/main.html' %} {% load static %} {% block content%}
+<style>
+  .thumbnail {
+    height: 20;
+    width: 20;
+  }
+</style>
+<div class="row">
+  {% for product in products %}
+  <div class="col-lg-4">
+    <img class="thumbnail" src="{{product.imageURL}}" alt="" />
+    <div class="box-element product">
+      <h6><strong>{{product.name}}</strong></h6>
+      <hr />
+      <button class="btn nbt-outline-secondary add-btn">Add to Cart</button>
+      <a class="btn btn-outline-success" href="#">View</a>
+      <h4 style="display: inline-block; float: right">
+        <strong>Ksh {{product.price|floatformat:2}}</strong>
+      </h4>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content%}
