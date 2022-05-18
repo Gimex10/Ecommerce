@@ -13,7 +13,9 @@
             <h5>Items: <strong>{{order.get_cart_items}}</strong></h5>
           </th>
           <th>
-            <h5>Total: <strong>Ksh {{order.get_cart_total|floatformat:2}}</strong></h5>
+            <h5>
+              Total: <strong>Ksh {{order.get_cart_total|floatformat:2}}</strong>
+            </h5>
           </th>
           <th>
             <a
@@ -40,25 +42,26 @@
       {% for item in items %}
       <div class="cart-row">
         <div style="flex: 2">
-          <img
-            class="row-image"
-            src="{{item.product.imageURL}}"
-            alt=""
-          />
+          <img class="row-image" src="{{item.product.imageURL}}" alt="" />
         </div>
         <div style="flex: 2">{{item.product.name}}</div>
         <div style="flex: 1">Ksh {{item.product.price|floatformat:2}}</div>
         <div style="flex: 1">
           <p class="quantity">{{item.quantity}}</p>
           <div class="quantity">
+            <!--icons for the update quantity-->
             <img
-              class="chg-quantity"
-              src="{% static 'images/arrow-up.png' %}"
+              data-product="{{item.product.id}}"
+              data-action="add"
+              class="chg-quantity update-cart"
+              src="{% static 'images/up-arrow.png' %}"
               alt=""
             />
             <img
-              class="chg-quantity"
-              src="{% static 'images/arrow-down.png' %}"
+              data-product="{{item.product.id}}"
+              data-action="remove"
+              class="chg-quantity update-cart"
+              src="{% static 'images/down-arrow.png' %}"
               alt=""
             />
           </div>

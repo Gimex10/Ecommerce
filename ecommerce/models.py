@@ -1,24 +1,27 @@
 from itertools import product
 from django.db import models
 
-from django.contrib.auth.models import User
+
+from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 
 # Create your models here.
+
+
+User = settings.AUTH_USER_MODEL
 
 
 class Customer(models.Model):
     user = models.OneToOneField(
         User, null=True, blank=True, on_delete=models.CASCADE)
-    name = models.CharField(max_length=200, null=True)
-    email = models.CharField(max_length=200, null=True)
 
     def __str__(self):
-        return self.name
+        return self.user.username
 
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
-    price = models.FloatField()
+    price = models.DecimalField(max_digits=9, decimal_places=2)
     digital = models.BooleanField(default=False, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
 
@@ -43,6 +46,15 @@ class Order(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+    @property
+    def shipping(self):
+        shipping = False
+        orderItems = self.orderitem_set.all()
+        for i in orderItems:
+            if i.product.digital == False:
+                shipping = True
+        return shipping
 
     @property
     def get_cart_total(self):

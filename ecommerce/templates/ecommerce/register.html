@@ -1,0 +1,11 @@
+{% extends 'ecommerce/main.html' %} {% load static %} {% block content%}
+
+<div class="row">
+  <form method="POST" action="." enctype="multipart/form-data">
+    {% csrf_token %} {{form}}
+    <button type="submit" class="{{ btn_class }}">
+      {% if submit_btn %} {{ submit_btn }} {% else %} Submit {% endif %}
+    </button>
+  </form>
+</div>
+{% endblock content%}

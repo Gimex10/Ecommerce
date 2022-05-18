@@ -104,6 +104,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+LOGIN_URL = "/login"
+LOGIN_REDIRECT_URL = "/"
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -134,3 +137,5 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/images/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+
+# AUTH_USER_MODEL = 'ecommerce.User'
